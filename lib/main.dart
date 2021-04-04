@@ -39,7 +39,10 @@ class BodyWidget extends StatelessWidget {
         builder: (context, bookProvider, child) {
           return ListView.builder(
               itemCount: bookProvider.books.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (
+                context,
+                index,
+              ) {
                 return BookCard(
                   bookTitle: bookProvider.books[index].title,
                   date: bookProvider.books[index].date,
