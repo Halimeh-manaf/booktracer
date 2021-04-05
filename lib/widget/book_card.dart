@@ -20,47 +20,62 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(
-            leading: Provider.of<BookProvider>(context, listen: false)
-                    .books[id]
-                    .isDone
-                ? Icon(
-                    Icons.check,
-                    color: Colors.green,
-                    size: 30.0,
-                  )
-                : Icon(
-                    Icons.menu_book,
-                    size: 30.0,
-                  ),
-            title: Text('$bookTitle'),
-            subtitle: Text("Since " + date.toLocal().toString().split(' ')[0]),
-          ),
-          ButtonBar(
-            children: [
-              IconButton(
-                icon: Icon(Icons.remove),
-                onPressed: () {
-                  Provider.of<BookProvider>(context, listen: false)
-                      .decreamentPage(id);
-                },
-              ),
-              Text("$pageNumber" + "/$totalPagesNumber"),
-              IconButton(
-                onPressed: () {
-                  Provider.of<BookProvider>(context, listen: false)
-                      .increamentPage(id);
-                },
-                icon: Icon(Icons.add),
-              ),
-            ],
-          ),
-        ],
+    return Padding(
+      padding: EdgeInsets.all(7.0),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              trailing: Provider.of<BookProvider>(context, listen: false)
+                      .books[id]
+                      .isDone
+                  ? GestureDetector(
+                      onTap: () {
+                        print("GOT THEM 1");
+                      },
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.green,
+                        size: 30.0,
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        Provider.of<BookProvider>(context, listen: false)
+                            .finishBook(id);
+                      },
+                      child: Icon(
+                        Icons.menu_book,
+                        size: 30.0,
+                      ),
+                    ),
+              title: Text('$bookTitle'),
+              subtitle:
+                  Text("Since " + date.toLocal().toString().split(' ')[0]),
+            ),
+            ButtonBar(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.remove),
+                  onPressed: () {
+                    Provider.of<BookProvider>(context, listen: false)
+                        .decreamentPage(id);
+                  },
+                ),
+                Text("$pageNumber" + "/$totalPagesNumber"),
+                IconButton(
+                  onPressed: () {
+                    Provider.of<BookProvider>(context, listen: false)
+                        .increamentPage(id);
+                  },
+                  icon: Icon(Icons.add),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

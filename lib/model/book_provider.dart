@@ -10,6 +10,14 @@ class BookProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void finishBook(int id) {
+    _bookList[id].isDone = true;
+    _bookList[id].totalPagesNumber = _bookList[id].totalPagesNumber;
+    _bookList[id].pageNumber = _bookList[id].totalPagesNumber;
+    _bookList[id].date = DateTime.now();
+    notifyListeners();
+  }
+
   void increamentPage(int id) {
     if (_bookList[id].pageNumber + 1 > _bookList[id].totalPagesNumber) {
       notifyListeners();
