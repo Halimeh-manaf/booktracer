@@ -1,14 +1,16 @@
 class Book {
   String title;
-  DateTime date;
+  DateTime startDate;
+  DateTime endDate;
   int pageNumber;
   int totalPagesNumber;
   bool isDone;
 
   Book(
       {this.title,
-      this.date,
+      this.startDate,
       this.pageNumber,
       this.totalPagesNumber,
-      this.isDone});
+      this.isDone,
+      this.endDate});
 }

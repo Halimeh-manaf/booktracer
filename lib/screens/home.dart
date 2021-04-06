@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
               itemBuilder: (context, index) {
                 return BookCard(
                     bookTitle: bookProvider.books[index].title,
-                    date: bookProvider.books[index].date,
+                    date: bookProvider.books[index].startDate,
                     pageNumber: bookProvider.books[index].pageNumber,
                     totalPagesNumber:
                         bookProvider.books[index].totalPagesNumber,

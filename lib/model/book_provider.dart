@@ -14,6 +14,7 @@ class BookProvider extends ChangeNotifier {
     _bookList[id].isDone = true;
     _bookList[id].totalPagesNumber = _bookList[id].totalPagesNumber;
     _bookList[id].pageNumber = _bookList[id].totalPagesNumber;
+    _bookList[id].endDate = DateTime.now();
     notifyListeners();
   }
 

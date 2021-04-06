@@ -136,7 +136,7 @@ class _BookDialogState extends State<BookDialog> {
                       Provider.of<BookProvider>(context, listen: false).addBook(
                         book: Book(
                           title: booktitleController.text,
-                          date: Provider.of<DateTimeProvider>(context,
+                          startDate: Provider.of<DateTimeProvider>(context,
                                   listen: false)
                               .dates,
                           pageNumber: int.parse(pageNumberController.text),
