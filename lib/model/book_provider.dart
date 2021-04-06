@@ -14,7 +14,6 @@ class BookProvider extends ChangeNotifier {
     _bookList[id].isDone = true;
     _bookList[id].totalPagesNumber = _bookList[id].totalPagesNumber;
     _bookList[id].pageNumber = _bookList[id].totalPagesNumber;
-    _bookList[id].date = DateTime.now();
     notifyListeners();
   }
 
@@ -37,7 +36,6 @@ class BookProvider extends ChangeNotifier {
     } else {
       _bookList[id].pageNumber--;
       _bookList[id].isDone = false;
-
       notifyListeners();
     }
   }
