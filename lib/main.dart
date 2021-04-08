@@ -1,8 +1,6 @@
 import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/bottom_navigation_bar_provider.dart';
 import 'package:booktracer/model/date_time_provider.dart';
-import 'package:booktracer/widget/book_card.dart';
-import 'package:booktracer/widget/book_dialog.dart';
 import 'package:booktracer/widget/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

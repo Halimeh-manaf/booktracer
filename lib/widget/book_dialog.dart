@@ -1,3 +1,4 @@
+import 'package:booktracer/database/database_helper.dart';
 import 'package:booktracer/model/book.dart';
 import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/constants.dart';
@@ -30,6 +31,8 @@ class _BookDialogState extends State<BookDialog> {
   final pageNumberController = TextEditingController();
 
   bool isVisible = false;
+
+  final dbHelper = DatabaseHelper.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +113,7 @@ class _BookDialogState extends State<BookDialog> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: TextButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (Provider.of<DateTimeProvider>(context, listen: false)
                             .dates ==
                         null) {
@@ -145,6 +148,21 @@ class _BookDialogState extends State<BookDialog> {
                           isDone: false,
                         ),
                       );
+                      Book book = Book(
+                        title: booktitleController.text,
+                        startDate: Provider.of<DateTimeProvider>(context,
+                                listen: false)
+                            .dates,
+                        pageNumber: int.parse(pageNumberController.text),
+                        totalPagesNumber:
+                            int.parse(totalPageNumberController.text),
+                        endDate: DateTime(0),
+                        isDone: false,
+                      );
+                      int id = await dbHelper.insert(book);
+                      print("ID: " + id.toString());
+                      Book book1 = await dbHelper.queryWord(1);
+                      print("book1: " + book1.toString());
                       Navigator.of(context).pop();
                     }
                   },
