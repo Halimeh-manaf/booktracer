@@ -12,7 +12,10 @@ class Home extends StatelessWidget {
         title: Text('App bar title'),
         actions: [
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: Icon(
+              Icons.delete,
+              size: 28,
+            ),
             onPressed: () async {
               await Provider.of<BookProvider>(context, listen: false)
                   .deleteAllRows();
