@@ -6,7 +6,7 @@ class Book {
   DateTime endDate;
   int pageNumber;
   int totalPagesNumber;
-  bool isDone;
+  int isDone;
   int id = 0;
 
   Book(

@@ -145,7 +145,7 @@ class _BookDialogState extends State<BookDialog> {
                           pageNumber: int.parse(pageNumberController.text),
                           totalPagesNumber:
                               int.parse(totalPageNumberController.text),
-                          isDone: false,
+                          isDone: 0,
                         ),
                       );
                       Book book = Book(
@@ -157,7 +157,7 @@ class _BookDialogState extends State<BookDialog> {
                         totalPagesNumber:
                             int.parse(totalPageNumberController.text),
                         endDate: DateTime(0),
-                        isDone: false,
+                        isDone: 0,
                       );
                       int id = await dbHelper.insert(book);
                       print("ID: " + id.toString());

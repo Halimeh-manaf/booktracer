@@ -29,8 +29,9 @@ class BookCard extends StatelessWidget {
           children: [
             ListTile(
               trailing: Provider.of<BookProvider>(context, listen: false)
-                      .books[id]
-                      .isDone
+                          .books[id]
+                          .isDone ==
+                      1
                   ? GestureDetector(
                       onTap: () {
                         print("GOT THEM 1");

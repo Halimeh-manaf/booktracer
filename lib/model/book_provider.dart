@@ -11,7 +11,7 @@ class BookProvider extends ChangeNotifier {
   }
 
   void finishBook(int id) {
-    _bookList[id].isDone = true;
+    _bookList[id].isDone = 1;
     _bookList[id].totalPagesNumber = _bookList[id].totalPagesNumber;
     _bookList[id].pageNumber = _bookList[id].totalPagesNumber;
     _bookList[id].endDate = DateTime.now();
@@ -24,7 +24,7 @@ class BookProvider extends ChangeNotifier {
     } else {
       _bookList[id].pageNumber++;
       if (_bookList[id].pageNumber == _bookList[id].totalPagesNumber) {
-        _bookList[id].isDone = true;
+        _bookList[id].isDone = 1;
         notifyListeners();
       }
       notifyListeners();
@@ -36,7 +36,7 @@ class BookProvider extends ChangeNotifier {
       notifyListeners();
     } else {
       _bookList[id].pageNumber--;
-      _bookList[id].isDone = false;
+      _bookList[id].isDone = 0;
       notifyListeners();
     }
   }
