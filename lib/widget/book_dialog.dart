@@ -145,24 +145,10 @@ class _BookDialogState extends State<BookDialog> {
                           pageNumber: int.parse(pageNumberController.text),
                           totalPagesNumber:
                               int.parse(totalPageNumberController.text),
+                          endDate: DateTime(0),
                           isDone: 0,
                         ),
                       );
-                      Book book = Book(
-                        title: booktitleController.text,
-                        startDate: Provider.of<DateTimeProvider>(context,
-                                listen: false)
-                            .dates,
-                        pageNumber: int.parse(pageNumberController.text),
-                        totalPagesNumber:
-                            int.parse(totalPageNumberController.text),
-                        endDate: DateTime(0),
-                        isDone: 0,
-                      );
-                      Book book1 = await dbHelper.insert(book);
-                      //print("ID: " + id.toString());
-                      //Book book1 = await dbHelper.queryWord(1);
-                      print("book1: " + book1.toString());
                       Navigator.of(context).pop();
                     }
                   },

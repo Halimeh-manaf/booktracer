@@ -10,6 +10,15 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('App bar title'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () async {
+              await Provider.of<BookProvider>(context, listen: false)
+                  .deleteAllRows();
+            },
+          )
+        ],
       ),
       body: Consumer<BookProvider>(
         builder: (context, bookProvider, child) {

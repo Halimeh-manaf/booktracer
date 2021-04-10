@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'package:booktracer/model/book.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'columns.dart';
 
 // singleton class to manage the database
-class DatabaseHelper {
+class DatabaseHelper with ChangeNotifier {
   // This is the actual database filename that is saved in the docs directory.
   static final _databaseName = "books.db";
   // Increment this version when you need to change the schema.
@@ -47,6 +48,7 @@ class DatabaseHelper {
                 $columnIsDone INTEGER NOT NULL
               )
               ''');
+    notifyListeners();
   }
 
   // Database helper methods:
@@ -77,7 +79,19 @@ class DatabaseHelper {
     return null;
   }
 
-  // TODO: queryAllBooks()
-  // TODO: delete(int id)
-  // TODO: update(Book book)
+  Future<List<Map<String, dynamic>>> queryTable(String table) async {
+    Database db = await database;
+    return await db.query(table);
+  }
+
+  Future<int> deleteById(int id) async {
+    Database db = await instance.database;
+    return await db.delete(tableBooks, where: '$columnId = ?', whereArgs: [id]);
+  }
+
+  Future<void> deleteAllRows() async {
+    Database db = await instance.database;
+    await db.execute("delete from $tableBooks");
+    notifyListeners();
+  }
 }
