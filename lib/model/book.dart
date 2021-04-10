@@ -7,7 +7,7 @@ class Book {
   int pageNumber;
   int totalPagesNumber;
   int isDone;
-  int id = 0;
+  int id;
 
   Book(
       {this.title,
@@ -43,5 +43,22 @@ class Book {
       map[columnId] = id;
     }
     return map;
+  }
+
+  String toString() {
+    return "ID: " +
+        id.toString() +
+        " title: " +
+        title +
+        " Current Page number: " +
+        pageNumber.toString() +
+        " Total pages number: " +
+        totalPagesNumber.toString() +
+        " Start date: " +
+        startDate.toString() +
+        " end date: " +
+        endDate.toString() +
+        " isDone " +
+        isDone.toString();
   }
 }

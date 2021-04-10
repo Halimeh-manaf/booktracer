@@ -51,10 +51,10 @@ class DatabaseHelper {
 
   // Database helper methods:
 
-  Future<int> insert(Book book) async {
+  Future<Book> insert(Book book) async {
     Database db = await database;
-    int id = await db.insert(tableBooks, book.toMap());
-    return id;
+    book.id = await db.insert(tableBooks, book.toMap());
+    return book;
   }
 
   Future<Book> queryWord(int id) async {

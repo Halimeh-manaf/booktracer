@@ -159,9 +159,9 @@ class _BookDialogState extends State<BookDialog> {
                         endDate: DateTime(0),
                         isDone: 0,
                       );
-                      int id = await dbHelper.insert(book);
-                      print("ID: " + id.toString());
-                      Book book1 = await dbHelper.queryWord(1);
+                      Book book1 = await dbHelper.insert(book);
+                      //print("ID: " + id.toString());
+                      //Book book1 = await dbHelper.queryWord(1);
                       print("book1: " + book1.toString());
                       Navigator.of(context).pop();
                     }
