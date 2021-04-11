@@ -35,6 +35,7 @@ class BookProvider extends ChangeNotifier {
     _bookList[id].totalPagesNumber = _bookList[id].totalPagesNumber;
     _bookList[id].pageNumber = _bookList[id].totalPagesNumber;
     _bookList[id].endDate = DateTime.now();
+    dbHelper.updateBook(_bookList[id]);
     notifyListeners();
   }
 
@@ -43,6 +44,7 @@ class BookProvider extends ChangeNotifier {
       notifyListeners();
     } else {
       _bookList[id].pageNumber++;
+      dbHelper.updateBook(_bookList[id]);
       if (_bookList[id].pageNumber == _bookList[id].totalPagesNumber) {
         finishBook(id);
         notifyListeners();
@@ -57,6 +59,7 @@ class BookProvider extends ChangeNotifier {
     } else {
       _bookList[id].pageNumber--;
       _bookList[id].isDone = 0;
+      dbHelper.updateBook(_bookList[id]);
       notifyListeners();
     }
   }

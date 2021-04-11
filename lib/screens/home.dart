@@ -37,8 +37,6 @@ class Home extends StatelessWidget {
                     id: index);
               });
         },
-        child: BookCard(
-            bookTitle: "Book Title", date: DateTime.now(), pageNumber: 12),
       ),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),

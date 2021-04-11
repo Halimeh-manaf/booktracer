@@ -34,8 +34,8 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.person),
-            label: 'Profile',
+            icon: new Icon(Icons.archive),
+            label: 'Archive',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

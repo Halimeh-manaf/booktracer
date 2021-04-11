@@ -94,4 +94,12 @@ class DatabaseHelper with ChangeNotifier {
     await db.execute("delete from $tableBooks");
     notifyListeners();
   }
+
+  Future<int> updateBook(Book book) async {
+    Database db = await instance.database;
+    int value = await db.update(tableBooks, book.toMap(),
+        where: '$columnId = ?', whereArgs: [book.id]);
+    notifyListeners();
+    return value;
+  }
 }
