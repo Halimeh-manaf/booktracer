@@ -2,6 +2,7 @@ import 'package:booktracer/database/columns.dart';
 import 'package:booktracer/database/database_helper.dart';
 import 'package:booktracer/model/book.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class BookProvider extends ChangeNotifier {
   List<Book> _bookList = [];
@@ -28,13 +29,39 @@ class BookProvider extends ChangeNotifier {
     }
   }
 
-  void finishBook(int id) {
+  void finishBook(int id) async {
     print(
         "List ID: " + id.toString() + " DB ID: " + _bookList[id].id.toString());
+    Fluttertoast.showToast(
+        msg: "Congrats 🎉 You can find the book in Archive",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.blueAccent,
+        textColor: Colors.white,
+        fontSize: 16.0);
     _bookList[id].isDone = 1;
     _bookList[id].totalPagesNumber = _bookList[id].totalPagesNumber;
     _bookList[id].pageNumber = _bookList[id].totalPagesNumber;
     _bookList[id].endDate = DateTime.now();
+    await dbHelper.updateBook(_bookList[id]);
+
+    notifyListeners();
+  }
+
+  void definishBook(int id) async {
+    _bookList[id].pageNumber--;
+    if (_bookList[id].isDone == 1) {
+      _bookList[id].isDone = 0;
+      Fluttertoast.showToast(
+          msg: "You can find the book in Home",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blueAccent,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
     dbHelper.updateBook(_bookList[id]);
     notifyListeners();
   }
@@ -57,10 +84,7 @@ class BookProvider extends ChangeNotifier {
     if (_bookList[id].pageNumber - 1 == 0) {
       notifyListeners();
     } else {
-      _bookList[id].pageNumber--;
-      _bookList[id].isDone = 0;
-      dbHelper.updateBook(_bookList[id]);
-      notifyListeners();
+      definishBook(id);
     }
   }
 

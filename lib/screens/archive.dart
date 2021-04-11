@@ -5,7 +5,7 @@ import 'package:booktracer/widget/book_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
+class Archive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
           return ListView.builder(
               itemCount: bookProvider.books.length,
               itemBuilder: (context, index) {
-                if (bookProvider.books[index].isDone == 0) {
+                if (bookProvider.books[index].isDone == 1) {
                   return BookCard(
                       bookTitle: bookProvider.books[index].title,
                       date: bookProvider.books[index].startDate,

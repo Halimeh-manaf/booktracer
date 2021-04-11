@@ -1,5 +1,6 @@
 import 'package:booktracer/model/book_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class BookCard extends StatelessWidget {
@@ -33,9 +34,7 @@ class BookCard extends StatelessWidget {
                           .isDone ==
                       1
                   ? GestureDetector(
-                      onTap: () {
-                        print("GOT THEM 1");
-                      },
+                      onTap: () {},
                       child: Icon(
                         Icons.check,
                         color: Colors.green,
