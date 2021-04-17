@@ -93,4 +93,12 @@ class BookProvider extends ChangeNotifier {
     await dbHelper.deleteAllRows();
     notifyListeners();
   }
+
+  Future<void> deleteBook(int id) async {
+    int dbID = _bookList[id].id;
+    await dbHelper.deleteById(dbID);
+    _bookList.removeAt(id);
+    print(_bookList.toString());
+    notifyListeners();
+  }
 }

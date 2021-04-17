@@ -2,7 +2,7 @@ import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/constants.dart';
 import 'package:booktracer/widget/book_card.dart';
 import 'package:booktracer/widget/book_dialog.dart';
-import 'package:booktracer/widget/delete_dialog.dart';
+import 'package:booktracer/widget/delete_all_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +18,13 @@ class Home extends StatelessWidget {
               Icons.delete,
               size: 28,
             ),
-            onPressed: () async {
+            onPressed: () {
               showDialog(
                 context: context,
-                builder: (_) => DeleteDialog(),
+                builder: (_) => DeleteDialog(
+                    title: Constants.deleteAllBooksTitle,
+                    content: Constants.deleteAllBooksContent,
+                    deleteAll: true),
                 barrierDismissible: true,
               );
             },

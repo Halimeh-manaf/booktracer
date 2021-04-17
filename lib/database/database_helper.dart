@@ -86,7 +86,10 @@ class DatabaseHelper with ChangeNotifier {
 
   Future<int> deleteById(int id) async {
     Database db = await instance.database;
-    return await db.delete(tableBooks, where: '$columnId = ?', whereArgs: [id]);
+    int deleteID =
+        await db.delete(tableBooks, where: '$columnId = ?', whereArgs: [id]);
+    notifyListeners();
+    return deleteID;
   }
 
   Future<void> deleteAllRows() async {

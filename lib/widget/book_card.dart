@@ -1,8 +1,11 @@
 import 'package:booktracer/model/book_provider.dart';
+import 'package:booktracer/model/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+
+import 'delete_all_dialog.dart';
 
 class BookCard extends StatelessWidget {
   final String bookTitle;
@@ -29,16 +32,21 @@ class BookCard extends StatelessWidget {
         actionExtentRatio: 0.25,
         secondaryActions: [
           IconSlideAction(
-            caption: 'Archive',
-            color: Colors.blue,
-            icon: Icons.archive,
-            onTap: () => _showSnackBar('Archive'),
-          ),
-          IconSlideAction(
-            caption: 'Share',
-            color: Colors.indigo,
-            icon: Icons.share,
-            onTap: () => _showSnackBar('Share'),
+            caption: Constants.bookCardDeleteBook,
+            color: Colors.red,
+            icon: Icons.delete,
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) => DeleteDialog(
+                    title: Constants.deleteBookTitle,
+                    content:
+                        "Are you sure you want to delete ${Provider.of<BookProvider>(context, listen: false).books[id].title}",
+                    deleteAll: false,
+                    id: id),
+                barrierDismissible: true,
+              );
+            },
           ),
         ],
         child: Card(
@@ -102,16 +110,5 @@ class BookCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  _showSnackBar(String s) {
-    Fluttertoast.showToast(
-        msg: "$s",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.blueAccent,
-        textColor: Colors.white,
-        fontSize: 16.0);
   }
 }
