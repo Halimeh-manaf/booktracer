@@ -37,13 +37,15 @@ class _BookDialogState extends State<BookDialog> {
   @override
   Widget build(BuildContext context) {
     pageNumberController.text = "1";
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Constants.padding),
+    return SingleChildScrollView(
+      child: Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Constants.padding),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        child: contentBox(context),
       ),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      child: contentBox(context),
     );
   }
 
