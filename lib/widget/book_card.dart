@@ -23,72 +23,61 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(7.0),
-      child: GestureDetector(
-        onTap: () {
-          print(Provider.of<BookProvider>(context, listen: false)
-              .books[id]
-              .id
-              .toString());
-        },
-        child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            ListTile(
-              trailing: Provider.of<BookProvider>(context, listen: false)
-                          .books[id]
-                          .isDone ==
-                      1
-                  ? GestureDetector(
-                      onTap: () {},
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.green,
-                        size: 30.0,
-                      ),
-                    )
-                  : GestureDetector(
-                      onTap: () {
-                        Provider.of<BookProvider>(context, listen: false)
-                            .finishBook(id);
-                      },
-                      child: Icon(
-                        Icons.menu_book,
-                        size: 30.0,
-                      ),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          ListTile(
+            trailing: Provider.of<BookProvider>(context, listen: false)
+                        .books[id]
+                        .isDone ==
+                    1
+                ? GestureDetector(
+                    onTap: () {},
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.green,
+                      size: 30.0,
                     ),
-              title: Text('$bookTitle'),
-              subtitle:
-                  Text("Since " + date.toLocal().toString().split(' ')[0]),
+                  )
+                : GestureDetector(
+                    onTap: () {
+                      Provider.of<BookProvider>(context, listen: false)
+                          .finishBook(id);
+                    },
+                    child: Icon(
+                      Icons.menu_book,
+                      size: 30.0,
+                    ),
+                  ),
+            title: Text('$bookTitle'),
+            subtitle: Text("Since " + date.toLocal().toString().split(' ')[0]),
+          ),
+          ButtonBar(children: [
+            IconButton(
+              icon: Icon(Icons.remove),
+              onPressed: () {
+                Provider.of<BookProvider>(context, listen: false)
+                    .decreamentPage(id);
+              },
             ),
-            ButtonBar(children: [
-              IconButton(
-                icon: Icon(Icons.remove),
-                onPressed: () {
-                  Provider.of<BookProvider>(context, listen: false)
-                      .decreamentPage(id);
-                },
-              ),
-              Row(
-                children: [
-                  Text("$pageNumber"),
-                  Text("/",
-                      style: TextStyle(
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.bold)),
-                  Text("$totalPagesNumber"),
-                ],
-              ),
-              IconButton(
-                onPressed: () {
-                  Provider.of<BookProvider>(context, listen: false)
-                      .increamentPage(id);
-                },
-                icon: Icon(Icons.add),
-              )
-            ]),
+            Row(
+              children: [
+                Text("$pageNumber"),
+                Text("/",
+                    style: TextStyle(
+                        color: Colors.blueAccent, fontWeight: FontWeight.bold)),
+                Text("$totalPagesNumber"),
+              ],
+            ),
+            IconButton(
+              onPressed: () {
+                Provider.of<BookProvider>(context, listen: false)
+                    .increamentPage(id);
+              },
+              icon: Icon(Icons.add),
+            )
           ]),
-        ),
+        ]),
       ),
     );
   }
