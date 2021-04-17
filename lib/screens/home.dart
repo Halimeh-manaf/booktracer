@@ -2,6 +2,7 @@ import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/constants.dart';
 import 'package:booktracer/widget/book_card.dart';
 import 'package:booktracer/widget/book_dialog.dart';
+import 'package:booktracer/widget/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,8 +19,11 @@ class Home extends StatelessWidget {
               size: 28,
             ),
             onPressed: () async {
-              await Provider.of<BookProvider>(context, listen: false)
-                  .deleteAllRows();
+              showDialog(
+                context: context,
+                builder: (_) => DeleteDialog(),
+                barrierDismissible: true,
+              );
             },
           )
         ],

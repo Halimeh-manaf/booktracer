@@ -23,11 +23,17 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(7.0),
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
+      child: GestureDetector(
+        onTap: () {
+          print(Provider.of<BookProvider>(context, listen: false)
+              .books[id]
+              .id
+              .toString());
+        },
+        child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
             ListTile(
               trailing: Provider.of<BookProvider>(context, listen: false)
                           .books[id]
@@ -55,26 +61,33 @@ class BookCard extends StatelessWidget {
               subtitle:
                   Text("Since " + date.toLocal().toString().split(' ')[0]),
             ),
-            ButtonBar(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: () {
-                    Provider.of<BookProvider>(context, listen: false)
-                        .decreamentPage(id);
-                  },
-                ),
-                Text("$pageNumber" + "/$totalPagesNumber"),
-                IconButton(
-                  onPressed: () {
-                    Provider.of<BookProvider>(context, listen: false)
-                        .increamentPage(id);
-                  },
-                  icon: Icon(Icons.add),
-                ),
-              ],
-            ),
-          ],
+            ButtonBar(children: [
+              IconButton(
+                icon: Icon(Icons.remove),
+                onPressed: () {
+                  Provider.of<BookProvider>(context, listen: false)
+                      .decreamentPage(id);
+                },
+              ),
+              Row(
+                children: [
+                  Text("$pageNumber"),
+                  Text("/",
+                      style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.bold)),
+                  Text("$totalPagesNumber"),
+                ],
+              ),
+              IconButton(
+                onPressed: () {
+                  Provider.of<BookProvider>(context, listen: false)
+                      .increamentPage(id);
+                },
+                icon: Icon(Icons.add),
+              )
+            ]),
+          ]),
         ),
       ),
     );
