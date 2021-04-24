@@ -1,10 +1,9 @@
 import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/constants.dart';
+import 'package:booktracer/screens/book_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-
 import 'delete_all_dialog.dart';
 
 class BookCard extends StatelessWidget {
@@ -49,64 +48,70 @@ class BookCard extends StatelessWidget {
             },
           ),
         ],
-        child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            ListTile(
-              trailing: Provider.of<BookProvider>(context, listen: false)
-                          .books[id]
-                          .isDone ==
-                      1
-                  ? GestureDetector(
-                      onTap: () {},
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.green,
-                        size: 30.0,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => BookScreen(id: id)));
+          },
+          child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              ListTile(
+                trailing: Provider.of<BookProvider>(context, listen: false)
+                            .books[id]
+                            .isDone ==
+                        1
+                    ? GestureDetector(
+                        onTap: () {},
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.green,
+                          size: 30.0,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          Provider.of<BookProvider>(context, listen: false)
+                              .finishBook(id);
+                        },
+                        child: Icon(
+                          Icons.menu_book,
+                          size: 30.0,
+                        ),
                       ),
-                    )
-                  : GestureDetector(
-                      onTap: () {
-                        Provider.of<BookProvider>(context, listen: false)
-                            .finishBook(id);
-                      },
-                      child: Icon(
-                        Icons.menu_book,
-                        size: 30.0,
-                      ),
-                    ),
-              title: Text('$bookTitle'),
-              subtitle:
-                  Text("Since " + date.toLocal().toString().split(' ')[0]),
-            ),
-            ButtonBar(children: [
-              IconButton(
-                icon: Icon(Icons.remove),
-                onPressed: () {
-                  Provider.of<BookProvider>(context, listen: false)
-                      .decreamentPage(id);
-                },
+                title: Text('$bookTitle'),
+                subtitle:
+                    Text("Since " + date.toLocal().toString().split(' ')[0]),
               ),
-              Row(
-                children: [
-                  Text("$pageNumber"),
-                  Text("/",
-                      style: TextStyle(
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.bold)),
-                  Text("$totalPagesNumber"),
-                ],
-              ),
-              IconButton(
-                onPressed: () {
-                  Provider.of<BookProvider>(context, listen: false)
-                      .increamentPage(id);
-                },
-                icon: Icon(Icons.add),
-              )
+              ButtonBar(children: [
+                IconButton(
+                  icon: Icon(Icons.remove),
+                  onPressed: () {
+                    Provider.of<BookProvider>(context, listen: false)
+                        .decreamentPage(id);
+                  },
+                ),
+                Row(
+                  children: [
+                    Text("$pageNumber"),
+                    Text("/",
+                        style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.bold)),
+                    Text("$totalPagesNumber"),
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {
+                    Provider.of<BookProvider>(context, listen: false)
+                        .increamentPage(id);
+                  },
+                  icon: Icon(Icons.add),
+                )
+              ]),
             ]),
-          ]),
+          ),
         ),
       ),
     );
