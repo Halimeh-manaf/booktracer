@@ -8,24 +8,17 @@ class BookScreen extends StatelessWidget {
   const BookScreen({this.id});
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(
             Provider.of<BookProvider>(context, listen: false).books[id].title),
       ),
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: Column(
         children: [
           Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 7.0),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10.0),
-                  bottomRight: Radius.circular(10.0),
-                )),
-            child: Text(Provider.of<BookProvider>(context, listen: false)
-                .books[id]
-                .title),
+            height: size.height * 0.2,
+            decoration: BoxDecoration(color: Colors.blueAccent),
           ),
         ],
       ),

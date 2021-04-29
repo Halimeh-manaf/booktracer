@@ -1,7 +1,6 @@
 import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/constants.dart';
 import 'package:booktracer/screens/book_screen.dart';
-import 'package:booktracer/screens/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +53,7 @@ class BookCard extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DoctorsInfo(id),
+                  builder: (context) => BookScreen(id: id),
                 ));
           },
           child: Card(
