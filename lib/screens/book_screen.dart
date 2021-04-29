@@ -18,7 +18,38 @@ class BookScreen extends StatelessWidget {
         children: [
           Container(
             height: size.height * 0.2,
-            decoration: BoxDecoration(color: Colors.blueAccent),
+            child: Stack(
+              children: [
+                Container(
+                  height: size.height * 0.2 - 27,
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(36),
+                        bottomRight: Radius.circular(36.0)),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    height: 54,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20.0),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 10),
+                              blurRadius: 50.0,
+                              color: Colors.black.withOpacity(0.23))
+                        ]),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
