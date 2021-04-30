@@ -31,8 +31,8 @@ class BookScreen extends StatelessWidget {
                 ),
                 Positioned(
                   bottom: 0,
-                  left: 0,
                   right: 0,
+                  left: 0,
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 20.0),
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
