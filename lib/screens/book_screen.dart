@@ -17,11 +17,11 @@ class BookScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: size.height * 0.2,
+            height: size.height * 0.15,
             child: Stack(
               children: [
                 Container(
-                  height: size.height * 0.2 - 27,
+                  height: size.height * 0.15 - 27,
                   decoration: BoxDecoration(
                     color: Colors.blueAccent,
                     borderRadius: BorderRadius.only(
@@ -46,10 +46,21 @@ class BookScreen extends StatelessWidget {
                               blurRadius: 50.0,
                               color: Colors.black.withOpacity(0.23))
                         ]),
+                    child: Center(
+                        child: Text(
+                      Provider.of<BookProvider>(context, listen: false)
+                          .books[id]
+                          .title,
+                      style: TextStyle(fontSize: 17.0),
+                    )),
                   ),
                 ),
               ],
             ),
+          ),
+          Container(
+            color: Colors.black,
+            height: 30,
           ),
         ],
       ),
