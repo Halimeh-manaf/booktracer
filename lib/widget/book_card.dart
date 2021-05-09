@@ -8,13 +8,12 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'delete_all_dialog.dart';
 
-class BookCard extends StatelessWidget {
+class BookCard extends StatefulWidget {
   final String bookTitle;
   final DateTime date;
   final pageNumber;
   final int id;
   final int totalPagesNumber;
-  Timer timer;
 
   BookCard({
     Key key,
@@ -24,6 +23,13 @@ class BookCard extends StatelessWidget {
     this.totalPagesNumber,
     this.id,
   }) : super(key: key);
+
+  @override
+  _BookCardState createState() => _BookCardState();
+}
+
+class _BookCardState extends State<BookCard> {
+  Timer timer;
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +49,9 @@ class BookCard extends StatelessWidget {
                 builder: (_) => DeleteDialog(
                     title: Constants.deleteBookTitle,
                     content:
-                        "Are you sure you want to delete ${Provider.of<BookProvider>(context, listen: false).books[id].title}",
+                        "Are you sure you want to delete ${Provider.of<BookProvider>(context, listen: false).books[widget.id].title}",
                     deleteAll: false,
-                    id: id),
+                    id: widget.id),
                 barrierDismissible: true,
               );
             },
@@ -56,7 +62,7 @@ class BookCard extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookScreen(id: id),
+                  builder: (context) => BookScreen(id: widget.id),
                 ));
           },
           child: Card(
@@ -65,7 +71,7 @@ class BookCard extends StatelessWidget {
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               ListTile(
                 trailing: Provider.of<BookProvider>(context, listen: false)
-                            .books[id]
+                            .books[widget.id]
                             .isDone ==
                         1
                     ? GestureDetector(
@@ -79,54 +85,66 @@ class BookCard extends StatelessWidget {
                     : GestureDetector(
                         onTap: () {
                           Provider.of<BookProvider>(context, listen: false)
-                              .finishBook(id);
+                              .finishBook(widget.id);
                         },
                         child: Icon(
                           Icons.menu_book,
                           size: 30.0,
                         ),
                       ),
-                title: Text('$bookTitle'),
-                subtitle:
-                    Text("Since " + date.toLocal().toString().split(' ')[0]),
+                title: Text('${widget.bookTitle}'),
+                subtitle: Text(
+                    "Since " + widget.date.toLocal().toString().split(' ')[0]),
               ),
               ButtonBar(children: [
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: () {
-                    Provider.of<BookProvider>(context, listen: false)
-                        .decreamentPage(id);
-                  },
-                ),
-                Row(
-                  children: [
-                    Text("$pageNumber"),
-                    Text("/",
-                        style: TextStyle(
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.bold)),
-                    Text("$totalPagesNumber"),
-                  ],
-                ),
                 GestureDetector(
                   onTapDown: (TapDownDetails details) {
-                    print('down');
                     timer = Timer.periodic(Duration(milliseconds: 500), (t) {
                       Provider.of<BookProvider>(context, listen: false)
-                          .increamentPage(id);
+                          .decreamentPage(widget.id);
                     });
                   },
                   onTapUp: (TapUpDetails details) {
                     timer.cancel();
                   },
                   onTapCancel: () {
-                    print('cancel');
+                    timer.cancel();
+                  },
+                  child: IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: () {
+                      Provider.of<BookProvider>(context, listen: false)
+                          .decreamentPage(widget.id);
+                    },
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text("${widget.pageNumber}"),
+                    Text("/",
+                        style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.bold)),
+                    Text("${widget.totalPagesNumber}"),
+                  ],
+                ),
+                GestureDetector(
+                  onTapDown: (TapDownDetails details) {
+                    timer = Timer.periodic(Duration(milliseconds: 200), (t) {
+                      Provider.of<BookProvider>(context, listen: false)
+                          .increamentPage(widget.id);
+                    });
+                  },
+                  onTapUp: (TapUpDetails details) {
+                    timer.cancel();
+                  },
+                  onTapCancel: () {
                     timer.cancel();
                   },
                   child: IconButton(
                     onPressed: () {
-                      //   Provider.of<BookProvider>(context, listen: false)
-                      //    .increamentPage(id);
+                      Provider.of<BookProvider>(context, listen: false)
+                          .increamentPage(widget.id);
                     },
                     icon: Icon(Icons.add),
                   ),
