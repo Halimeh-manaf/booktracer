@@ -9,7 +9,7 @@ class BookScreen extends StatelessWidget {
   const BookScreen({this.id});
   @override
   Widget build(BuildContext context) {
-    Size Screensize = MediaQuery.of(context).size;
+    Size screensize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -18,7 +18,7 @@ class BookScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HeaderWithBookTitle(size: Screensize, id: id),
+            HeaderWithBookTitle(size: screensize, id: id),
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
               padding: EdgeInsets.symmetric(vertical: 20.0),

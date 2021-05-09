@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/constants.dart';
 import 'package:booktracer/screens/book_screen.dart';
@@ -12,8 +14,9 @@ class BookCard extends StatelessWidget {
   final pageNumber;
   final int id;
   final int totalPagesNumber;
+  Timer timer;
 
-  const BookCard({
+  BookCard({
     Key key,
     this.bookTitle,
     this.date,
@@ -105,12 +108,28 @@ class BookCard extends StatelessWidget {
                     Text("$totalPagesNumber"),
                   ],
                 ),
-                IconButton(
-                  onPressed: () {
-                    Provider.of<BookProvider>(context, listen: false)
-                        .increamentPage(id);
+                GestureDetector(
+                  onTapDown: (TapDownDetails details) {
+                    print('down');
+                    timer = Timer.periodic(Duration(milliseconds: 500), (t) {
+                      Provider.of<BookProvider>(context, listen: false)
+                          .increamentPage(id);
+                    });
                   },
-                  icon: Icon(Icons.add),
+                  onTapUp: (TapUpDetails details) {
+                    timer.cancel();
+                  },
+                  onTapCancel: () {
+                    print('cancel');
+                    timer.cancel();
+                  },
+                  child: IconButton(
+                    onPressed: () {
+                      //   Provider.of<BookProvider>(context, listen: false)
+                      //    .increamentPage(id);
+                    },
+                    icon: Icon(Icons.add),
+                  ),
                 )
               ]),
             ]),
