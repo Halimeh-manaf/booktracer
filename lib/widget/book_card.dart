@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/constants.dart';
 import 'package:booktracer/screens/book_screen.dart';
