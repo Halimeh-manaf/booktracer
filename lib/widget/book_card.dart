@@ -59,10 +59,11 @@ class _BookCardState extends State<BookCard> {
         child: GestureDetector(
           onTap: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookScreen(id: widget.id),
-                ));
+              context,
+              MaterialPageRoute(
+                builder: (context) => BookScreen(id: widget.id),
+              ),
+            );
           },
           child: Card(
             shape:
