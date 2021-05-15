@@ -1,14 +1,27 @@
 import 'package:booktracer/database/columns.dart';
 import 'package:booktracer/database/database_helper.dart';
 import 'package:booktracer/model/book.dart';
+import 'package:booktracer/model/notes.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class BookProvider extends ChangeNotifier {
   List<Book> _bookList = [];
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
+  List<Notes> _notesList = [];
 
   List<Book> get books => _bookList;
+
+  List<Notes> getNotes(int id) {
+    List<Notes> list = [];
+    for (Notes item in _notesList) {
+      if (item.id == id) {
+        list.add(item);
+      }
+    }
+    return list;
+  }
+
   void addBook({Book book}) async {
     _bookList.add(book);
     await dbHelper.insert(book);
@@ -19,12 +32,23 @@ class BookProvider extends ChangeNotifier {
     if (dbHelper != null) fetchAndSetData();
   }
 
+  Future<void> addNote(Notes note) async {
+    await dbHelper.insertNote(note);
+    final dataList = await dbHelper.queryTable(tableNotes);
+    print(dataList);
+    notifyListeners();
+  }
+
   Future<void> fetchAndSetData() async {
     if (dbHelper != null) {
       // do not execute if db is not instantiate
       final dataList = await dbHelper.queryTable(tableBooks);
       _bookList = dataList.map((item) => Book.fromMap(item)).toList();
-      print(dataList.toString());
+      print("Books: " + _bookList.toString());
+
+      final notesList = await dbHelper.queryTable(tableNotes);
+      _notesList = notesList.map((item) => Notes.fromMap(item)).toList();
+      print("Notes: " + _notesList.toString());
       notifyListeners();
     }
   }

@@ -54,7 +54,8 @@ class DatabaseHelper with ChangeNotifier {
               CREATE TABLE $tableNotes (
                 $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
                 $columnBookID INTEGER NOT NULL,
-                $columnNote TEXT NOT NULL
+                $columnNote TEXT NOT NULL,
+                $columnNotePageNumber INTEGER NOT NULL
               )
               ''');
 
@@ -69,7 +70,7 @@ class DatabaseHelper with ChangeNotifier {
     return book;
   }
 
-  Future<Notes> insertNote(int id, Notes notes) async {
+  Future<Notes> insertNote(Notes notes) async {
     Database db = await database;
     notes.id = await db.insert(tableNotes, notes.toMap());
     return notes;

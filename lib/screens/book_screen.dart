@@ -1,7 +1,4 @@
-import 'package:booktracer/database/columns.dart';
-import 'package:booktracer/database/database_helper.dart';
 import 'package:booktracer/model/book_provider.dart';
-import 'package:booktracer/model/notes.dart';
 import 'package:booktracer/widget/book_card.dart';
 import 'package:booktracer/widget/header_with_book_title.dart';
 import 'package:booktracer/widget/title_with_add_buttom.dart';
@@ -10,7 +7,6 @@ import 'package:provider/provider.dart';
 
 class BookScreen extends StatelessWidget {
   final int id;
-  final DatabaseHelper dbHelper = DatabaseHelper.instance;
 
   BookScreen({this.id});
   @override
@@ -30,10 +26,10 @@ class BookScreen extends StatelessWidget {
             HeaderWithBookTitle(size: screensize, id: id),
             TitleWithAddBtn(
                 title: "Add",
-                onPressed: () async {
-                  await dbHelper.insertNote(1, Notes(bookID: 1, note: "LOL"));
-                  final dataList = await dbHelper.queryTable(tableNotes);
-                  print(dataList);
+                onPressed: () {
+                  //Provider.of<BookProvider>(context, listen: false).addNote(Notes(bookID: id,note: " "));
+                  Provider.of<BookProvider>(context, listen: false)
+                      .getNotes(id + 1);
                 }),
             Flexible(
               fit: FlexFit.loose,
@@ -43,9 +39,9 @@ class BookScreen extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       physics: ScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: bookProvider.books.length,
+                      itemCount: bookProvider.getNotes(id + 1).length,
                       itemBuilder: (context, index) {
-                        if (bookProvider.books[index].isDone == 0) {
+                        if (bookProvider.getNotes(id + 1).length == 0) {
                           return BookCard(
                               bookTitle: bookProvider.books[index].title,
                               date: bookProvider.books[index].startDate,

@@ -9,3 +9,4 @@ final String columnTotalPageNumber = 'totalpagenumber';
 final String columnIsDone = 'isdone';
 final String columnNote = 'note';
 final String columnBookID = 'bookID';
+final String columnNotePageNumber = 'notePageNumber';
