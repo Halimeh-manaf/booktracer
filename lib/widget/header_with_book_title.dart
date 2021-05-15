@@ -1,6 +1,4 @@
-import 'package:booktracer/model/book_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HeaderWithBookTitle extends StatelessWidget {
   const HeaderWithBookTitle({
