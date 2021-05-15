@@ -1,4 +1,5 @@
 import 'package:booktracer/model/book_provider.dart';
+import 'package:booktracer/widget/book_card.dart';
 import 'package:booktracer/widget/header_with_book_title.dart';
 import 'package:booktracer/widget/title_with_add_buttom.dart';
 import 'package:flutter/material.dart';
@@ -17,31 +18,38 @@ class BookScreen extends StatelessWidget {
             Provider.of<BookProvider>(context, listen: false).books[id].title),
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        physics: ScrollPhysics(),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             HeaderWithBookTitle(size: screensize, id: id),
             TitleWithAddBtn(title: "Add", onPressed: () {}),
-            // it will cover  40% of screensize
-            Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 20.0 / 2),
-                  width: screensize.width * 0.4,
-                  child: Column(
-                    children: [
-                      Text("loldsa"),
-                      Text("loldsa"),
-                      Text("loldsa"),
-                      Text("loldsa"),
-                      Text("loldsa"),
-                      Text("loldsa"),
-                      Text("loldsa"),
-                      Text("loldsa"),
-                    ],
-                  ),
-                ),
-              ],
-            )
+            Flexible(
+              fit: FlexFit.loose,
+              child: Consumer<BookProvider>(
+                builder: (context, bookProvider, child) {
+                  return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: bookProvider.books.length,
+                      itemBuilder: (context, index) {
+                        if (bookProvider.books[index].isDone == 0) {
+                          return BookCard(
+                              bookTitle: bookProvider.books[index].title,
+                              date: bookProvider.books[index].startDate,
+                              pageNumber: bookProvider.books[index].pageNumber,
+                              totalPagesNumber:
+                                  bookProvider.books[index].totalPagesNumber,
+                              id: index);
+                        } else {
+                          return SizedBox.shrink();
+                        }
+                      });
+                },
+              ),
+            ),
           ],
         ),
       ),
