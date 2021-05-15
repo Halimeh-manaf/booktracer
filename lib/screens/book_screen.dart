@@ -21,6 +21,27 @@ class BookScreen extends StatelessWidget {
           children: [
             HeaderWithBookTitle(size: screensize, id: id),
             TitleWithAddBtn(title: "Add", onPressed: () {}),
+            // it will cover  40% of screensize
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 20.0 / 2),
+                  width: screensize.width * 0.4,
+                  child: Column(
+                    children: [
+                      Text("loldsa"),
+                      Text("loldsa"),
+                      Text("loldsa"),
+                      Text("loldsa"),
+                      Text("loldsa"),
+                      Text("loldsa"),
+                      Text("loldsa"),
+                      Text("loldsa"),
+                    ],
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
