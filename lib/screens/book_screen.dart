@@ -1,4 +1,7 @@
+import 'package:booktracer/database/columns.dart';
+import 'package:booktracer/database/database_helper.dart';
 import 'package:booktracer/model/book_provider.dart';
+import 'package:booktracer/model/notes.dart';
 import 'package:booktracer/widget/book_card.dart';
 import 'package:booktracer/widget/header_with_book_title.dart';
 import 'package:booktracer/widget/title_with_add_buttom.dart';
@@ -7,8 +10,9 @@ import 'package:provider/provider.dart';
 
 class BookScreen extends StatelessWidget {
   final int id;
+  final DatabaseHelper dbHelper = DatabaseHelper.instance;
 
-  const BookScreen({this.id});
+  BookScreen({this.id});
   @override
   Widget build(BuildContext context) {
     Size screensize = MediaQuery.of(context).size;
@@ -24,7 +28,13 @@ class BookScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             HeaderWithBookTitle(size: screensize, id: id),
-            TitleWithAddBtn(title: "Add", onPressed: () {}),
+            TitleWithAddBtn(
+                title: "Add",
+                onPressed: () async {
+                  await dbHelper.insertNote(1, Notes(bookID: 1, note: "LOL"));
+                  final dataList = await dbHelper.queryTable(tableNotes);
+                  print(dataList);
+                }),
             Flexible(
               fit: FlexFit.loose,
               child: Consumer<BookProvider>(

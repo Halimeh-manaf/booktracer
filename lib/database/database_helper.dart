@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:booktracer/model/book.dart';
+import 'package:booktracer/model/notes.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -48,6 +49,15 @@ class DatabaseHelper with ChangeNotifier {
                 $columnIsDone INTEGER NOT NULL
               )
               ''');
+
+    await db.execute('''
+              CREATE TABLE $tableNotes (
+                $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
+                $columnBookID INTEGER NOT NULL,
+                $columnNote TEXT NOT NULL
+              )
+              ''');
+
     notifyListeners();
   }
 
@@ -57,6 +67,12 @@ class DatabaseHelper with ChangeNotifier {
     Database db = await database;
     book.id = await db.insert(tableBooks, book.toMap());
     return book;
+  }
+
+  Future<Notes> insertNote(int id, Notes notes) async {
+    Database db = await database;
+    notes.id = await db.insert(tableNotes, notes.toMap());
+    return notes;
   }
 
   Future<Book> queryWord(int id) async {

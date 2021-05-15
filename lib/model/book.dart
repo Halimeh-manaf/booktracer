@@ -1,4 +1,5 @@
 import 'package:booktracer/database/columns.dart';
+import 'package:booktracer/model/notes.dart';
 
 class Book {
   String title;
@@ -8,6 +9,7 @@ class Book {
   int totalPagesNumber;
   int isDone;
   int id;
+  List<Notes> notes = [];
 
   Book(
       {this.title,
