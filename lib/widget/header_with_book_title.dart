@@ -15,11 +15,12 @@ class HeaderWithBookTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 20.0 * 2.5),
       height: size.height * 0.15,
       child: Stack(
         children: [
           Container(
-            height: size.height * 0.15 - 27,
+            height: size.height * 0.15 - 20,
             decoration: BoxDecoration(
               color: Colors.blueAccent,
               borderRadius: BorderRadius.only(
@@ -27,12 +28,7 @@ class HeaderWithBookTitle extends StatelessWidget {
                   bottomRight: Radius.circular(36.0)),
             ),
             child: Row(
-              children: [
-                Text(
-                  "Hello World!",
-                  style: Theme.of(context).textTheme.headline4,
-                )
-              ],
+              children: [],
             ),
           ),
           Positioned(
@@ -42,7 +38,7 @@ class HeaderWithBookTitle extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 20.0),
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              height: 54,
+              height: 50,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20.0),
@@ -54,9 +50,7 @@ class HeaderWithBookTitle extends StatelessWidget {
                   ]),
               child: Center(
                   child: Text(
-                Provider.of<BookProvider>(context, listen: false)
-                    .books[id]
-                    .title,
+                "Book Overview",
                 style: TextStyle(fontSize: 17.0),
               )),
             ),
