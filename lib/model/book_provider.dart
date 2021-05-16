@@ -10,6 +10,10 @@ class BookProvider extends ChangeNotifier {
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
   List<Notes> _notesList = [];
 
+  BookProvider(this._bookList) {
+    if (dbHelper != null) fetchAndSetData();
+  }
+
   List<Book> get books => _bookList;
 
   List<Notes> getNotes(int id) {
@@ -28,11 +32,7 @@ class BookProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  BookProvider(this._bookList) {
-    if (dbHelper != null) fetchAndSetData();
-  }
-
-  Future<void> addNote(Notes note) async {
+  void addNote(Notes note) async {
     await dbHelper.insertNote(note);
     final dataList = await dbHelper.queryTable(tableNotes);
     print(dataList);

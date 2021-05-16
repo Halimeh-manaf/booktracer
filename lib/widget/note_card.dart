@@ -66,83 +66,20 @@ class _NoteCardState extends State<NoteCard> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               ListTile(
-                trailing: Provider.of<BookProvider>(context, listen: false)
-                            .books[widget.id]
-                            .isDone ==
-                        1
-                    ? GestureDetector(
-                        onTap: () {},
-                        child: Icon(
-                          Icons.check,
-                          color: Colors.green,
-                          size: 30.0,
-                        ),
-                      )
-                    : GestureDetector(
-                        onTap: () {
-                          Provider.of<BookProvider>(context, listen: false)
-                              .finishBook(widget.id);
-                        },
-                        child: Icon(
-                          Icons.menu_book,
-                          size: 30.0,
-                        ),
-                      ),
                 title: Text('${widget.note}'),
               ),
-              ButtonBar(children: [
-                GestureDetector(
-                  onTapDown: (TapDownDetails details) {
-                    timer = Timer.periodic(Duration(milliseconds: 500), (t) {
-                      Provider.of<BookProvider>(context, listen: false)
-                          .decreamentPage(widget.id);
-                    });
-                  },
-                  onTapUp: (TapUpDetails details) {
-                    timer.cancel();
-                  },
-                  onTapCancel: () {
-                    timer.cancel();
-                  },
-                  child: IconButton(
-                    icon: Icon(Icons.remove),
-                    onPressed: () {
-                      Provider.of<BookProvider>(context, listen: false)
-                          .decreamentPage(widget.id);
-                    },
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text("${widget.pageNumber}"),
-                    Text("/",
+              Row(
+                children: [
+                  Spacer(),
+                  Padding(
+                      padding: EdgeInsets.only(right: 20.0, bottom: 5.0),
+                      child: Text(
+                        "Page: " + "${widget.pageNumber}",
                         style: TextStyle(
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                GestureDetector(
-                  onTapDown: (TapDownDetails details) {
-                    timer = Timer.periodic(Duration(milliseconds: 200), (t) {
-                      Provider.of<BookProvider>(context, listen: false)
-                          .increamentPage(widget.id);
-                    });
-                  },
-                  onTapUp: (TapUpDetails details) {
-                    timer.cancel();
-                  },
-                  onTapCancel: () {
-                    timer.cancel();
-                  },
-                  child: IconButton(
-                    onPressed: () {
-                      Provider.of<BookProvider>(context, listen: false)
-                          .increamentPage(widget.id);
-                    },
-                    icon: Icon(Icons.add),
-                  ),
-                )
-              ]),
+                            fontSize: 11.0, fontWeight: FontWeight.bold),
+                      )),
+                ],
+              ),
             ]),
           ),
         ),
