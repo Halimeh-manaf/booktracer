@@ -7,27 +7,23 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'delete_all_dialog.dart';
 
-class BookCard extends StatefulWidget {
-  final String bookTitle;
-  final DateTime date;
+class NoteCard extends StatefulWidget {
+  final String note;
   final pageNumber;
   final int id;
-  final int totalPagesNumber;
 
-  BookCard({
+  const NoteCard({
     Key key,
-    this.bookTitle,
-    this.date,
+    this.note,
     this.pageNumber,
-    this.totalPagesNumber,
     this.id,
   }) : super(key: key);
 
   @override
-  _BookCardState createState() => _BookCardState();
+  _NoteCardState createState() => _NoteCardState();
 }
 
-class _BookCardState extends State<BookCard> {
+class _NoteCardState extends State<NoteCard> {
   Timer timer;
 
   @override
@@ -92,9 +88,7 @@ class _BookCardState extends State<BookCard> {
                           size: 30.0,
                         ),
                       ),
-                title: Text('${widget.bookTitle}'),
-                subtitle: Text(
-                    "Since " + widget.date.toLocal().toString().split(' ')[0]),
+                title: Text('${widget.note}'),
               ),
               ButtonBar(children: [
                 GestureDetector(
@@ -125,7 +119,6 @@ class _BookCardState extends State<BookCard> {
                         style: TextStyle(
                             color: Colors.blueAccent,
                             fontWeight: FontWeight.bold)),
-                    Text("${widget.totalPagesNumber}"),
                   ],
                 ),
                 GestureDetector(

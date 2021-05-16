@@ -1,6 +1,7 @@
 import 'package:booktracer/model/book_provider.dart';
-import 'package:booktracer/widget/book_card.dart';
+import 'package:booktracer/model/notes.dart';
 import 'package:booktracer/widget/header_with_book_title.dart';
+import 'package:booktracer/widget/note_card.dart';
 import 'package:booktracer/widget/title_with_add_buttom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,7 @@ import 'package:provider/provider.dart';
 class BookScreen extends StatelessWidget {
   final int id;
 
-  BookScreen({this.id});
+  const BookScreen({this.id});
   @override
   Widget build(BuildContext context) {
     Size screensize = MediaQuery.of(context).size;
@@ -28,8 +29,11 @@ class BookScreen extends StatelessWidget {
                 title: "Add",
                 onPressed: () {
                   //Provider.of<BookProvider>(context, listen: false).addNote(Notes(bookID: id,note: " "));
-                  Provider.of<BookProvider>(context, listen: false)
-                      .getNotes(id + 1);
+                  Provider.of<BookProvider>(context, listen: false).addNote(
+                      Notes(bookID: id + 1, note: "LOL", pageNumber: 1));
+                  print("HERE:");
+                  print(Provider.of<BookProvider>(context, listen: false)
+                      .getNotes(id + 1));
                 }),
             Flexible(
               fit: FlexFit.loose,
@@ -41,13 +45,12 @@ class BookScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: bookProvider.getNotes(id + 1).length,
                       itemBuilder: (context, index) {
-                        if (bookProvider.getNotes(id + 1).length == 0) {
-                          return BookCard(
-                              bookTitle: bookProvider.books[index].title,
-                              date: bookProvider.books[index].startDate,
-                              pageNumber: bookProvider.books[index].pageNumber,
-                              totalPagesNumber:
-                                  bookProvider.books[index].totalPagesNumber,
+                        if (bookProvider.getNotes(id + 1).length != 0) {
+                          return NoteCard(
+                              note: bookProvider.getNotes(id + 1)[index].note,
+                              pageNumber: bookProvider
+                                  .getNotes(id + 1)[index]
+                                  .pageNumber,
                               id: index);
                         } else {
                           return SizedBox.shrink();

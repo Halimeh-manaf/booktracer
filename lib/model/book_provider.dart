@@ -15,7 +15,7 @@ class BookProvider extends ChangeNotifier {
   List<Notes> getNotes(int id) {
     List<Notes> list = [];
     for (Notes item in _notesList) {
-      if (item.id == id) {
+      if (item.bookID == id) {
         list.add(item);
       }
     }
