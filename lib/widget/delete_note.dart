@@ -31,7 +31,7 @@ class DeleteNoteDialog extends StatelessWidget {
             onPressed: () async {
               if (deleteAll) {
                 await Provider.of<BookProvider>(context, listen: false)
-                    .deleteAllRows();
+                    .deleteAllNotes(id);
                 Navigator.of(context).pop();
               } else {
                 await Provider.of<BookProvider>(context, listen: false)

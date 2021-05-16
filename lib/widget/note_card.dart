@@ -38,11 +38,11 @@ class _NoteCardState extends State<NoteCard> {
               showDialog(
                 context: context,
                 builder: (_) => DeleteNoteDialog(
-                    title: Constants.deleteBookTitle,
-                    content: "Are you sure you want to delete",
+                    title: "Delete Note",
+                    content: "Are you sure you want to delete this note?",
                     deleteAll: false,
                     notes: widget.notes,
-                    id: widget.id),
+                    id: widget.id + 1),
                 barrierDismissible: true,
               );
             },

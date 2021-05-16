@@ -1,5 +1,6 @@
 import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/notes.dart';
+import 'package:booktracer/widget/delete_note.dart';
 import 'package:booktracer/widget/header_with_book_title.dart';
 import 'package:booktracer/widget/note_card.dart';
 import 'package:booktracer/widget/note_dialog.dart';
@@ -18,6 +19,25 @@ class BookScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
             Provider.of<BookProvider>(context, listen: false).books[id].title),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.delete,
+              size: 28,
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (_) => DeleteNoteDialog(
+                    title: "Delete All Notes",
+                    content: "Are you sure you want to delete all Notes?",
+                    id: id + 1,
+                    deleteAll: true),
+                barrierDismissible: true,
+              );
+            },
+          )
+        ],
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
