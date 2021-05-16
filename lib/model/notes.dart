@@ -6,7 +6,7 @@ class Notes {
   int id;
   int pageNumber;
 
-  Notes({this.bookID, this.note, this.pageNumber});
+  Notes({this.bookID, this.note, this.pageNumber, this.id});
 
   Notes.fromMap(Map<String, dynamic> map) {
     id = map[columnId];

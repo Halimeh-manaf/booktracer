@@ -127,4 +127,15 @@ class BookProvider extends ChangeNotifier {
     print(_bookList.toString());
     notifyListeners();
   }
+
+  Future<void> deleteNote(int id) async {
+    print(_notesList);
+    print("ID: " + id.toString());
+    int index = _notesList.indexWhere((element) => element.id == id);
+    print("index: " + index.toString());
+    await dbHelper.deleteNoteById(id);
+    _notesList.removeAt(index);
+    print(_notesList.toString());
+    notifyListeners();
+  }
 }

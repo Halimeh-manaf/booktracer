@@ -1,22 +1,18 @@
 import 'dart:async';
-import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/constants.dart';
-import 'package:booktracer/screens/book_screen.dart';
+import 'package:booktracer/model/notes.dart';
+import 'package:booktracer/widget/delete_note.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
-import 'delete_all_dialog.dart';
 
 class NoteCard extends StatefulWidget {
-  final String note;
-  final pageNumber;
+  final Notes notes;
   final int id;
 
   const NoteCard({
     Key key,
-    this.note,
-    this.pageNumber,
     this.id,
+    this.notes,
   }) : super(key: key);
 
   @override
@@ -41,11 +37,11 @@ class _NoteCardState extends State<NoteCard> {
             onTap: () {
               showDialog(
                 context: context,
-                builder: (_) => DeleteDialog(
+                builder: (_) => DeleteNoteDialog(
                     title: Constants.deleteBookTitle,
-                    content:
-                        "Are you sure you want to delete ${Provider.of<BookProvider>(context, listen: false).books[widget.id].title}",
+                    content: "Are you sure you want to delete",
                     deleteAll: false,
+                    notes: widget.notes,
                     id: widget.id),
                 barrierDismissible: true,
               );
@@ -58,7 +54,7 @@ class _NoteCardState extends State<NoteCard> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               ListTile(
-                title: Text('${widget.note}'),
+                title: Text('${widget.notes.note}'),
               ),
               Row(
                 children: [
@@ -66,7 +62,7 @@ class _NoteCardState extends State<NoteCard> {
                   Padding(
                       padding: EdgeInsets.only(right: 20.0, bottom: 5.0),
                       child: Text(
-                        "Page: " + "${widget.pageNumber}",
+                        "Page: " + "${widget.notes.pageNumber}",
                         style: TextStyle(
                             fontSize: 11.0, fontWeight: FontWeight.bold),
                       )),

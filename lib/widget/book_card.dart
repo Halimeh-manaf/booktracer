@@ -5,7 +5,7 @@ import 'package:booktracer/screens/book_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-import 'delete_all_dialog.dart';
+import 'delete_dialog.dart';
 
 class BookCard extends StatefulWidget {
   final String bookTitle;

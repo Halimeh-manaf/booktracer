@@ -122,4 +122,12 @@ class DatabaseHelper with ChangeNotifier {
     notifyListeners();
     return value;
   }
+
+  Future<int> deleteNoteById(int id) async {
+    Database db = await instance.database;
+    int deleteID =
+        await db.delete(tableNotes, where: '$columnId = ?', whereArgs: [id]);
+    notifyListeners();
+    return deleteID;
+  }
 }

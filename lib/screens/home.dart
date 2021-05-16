@@ -2,7 +2,7 @@ import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/constants.dart';
 import 'package:booktracer/widget/book_card.dart';
 import 'package:booktracer/widget/book_dialog.dart';
-import 'package:booktracer/widget/delete_all_dialog.dart';
+import 'package:booktracer/widget/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

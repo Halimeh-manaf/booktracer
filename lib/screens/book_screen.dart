@@ -57,10 +57,7 @@ class BookScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         if (bookProvider.getNotes(id + 1).length != 0) {
                           return NoteCard(
-                              note: bookProvider.getNotes(id + 1)[index].note,
-                              pageNumber: bookProvider
-                                  .getNotes(id + 1)[index]
-                                  .pageNumber,
+                              notes: bookProvider.getNotes(id + 1)[index],
                               id: index);
                         } else {
                           return SizedBox.shrink();
