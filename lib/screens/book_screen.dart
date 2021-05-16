@@ -2,6 +2,7 @@ import 'package:booktracer/model/book_provider.dart';
 import 'package:booktracer/model/notes.dart';
 import 'package:booktracer/widget/header_with_book_title.dart';
 import 'package:booktracer/widget/note_card.dart';
+import 'package:booktracer/widget/note_dialog.dart';
 import 'package:booktracer/widget/title_with_add_buttom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,12 +29,21 @@ class BookScreen extends StatelessWidget {
             TitleWithAddBtn(
                 title: "Add",
                 onPressed: () {
-                  //Provider.of<BookProvider>(context, listen: false).addNote(Notes(bookID: id,note: " "));
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return NoteDialog(
+                          id: id + 1,
+                        );
+                      });
+
+/*
                   Provider.of<BookProvider>(context, listen: false).addNote(
-                      Notes(bookID: id + 1, note: "LOL", pageNumber: 1));
+                      note: Notes(bookID: id + 1, note: "LOL", pageNumber: 1));
                   print("HERE:");
                   print(Provider.of<BookProvider>(context, listen: false)
                       .getNotes(id + 1));
+                      */
                 }),
             Flexible(
               fit: FlexFit.loose,

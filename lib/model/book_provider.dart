@@ -9,21 +9,23 @@ class BookProvider extends ChangeNotifier {
   List<Book> _bookList = [];
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
   List<Notes> _notesList = [];
+  List<Notes> _noteOneBookList = [];
 
   BookProvider(this._bookList) {
     if (dbHelper != null) fetchAndSetData();
   }
 
   List<Book> get books => _bookList;
+  List<Notes> get notes => _notesList;
 
   List<Notes> getNotes(int id) {
-    List<Notes> list = [];
+    _noteOneBookList = [];
     for (Notes item in _notesList) {
       if (item.bookID == id) {
-        list.add(item);
+        _noteOneBookList.add(item);
       }
     }
-    return list;
+    return _noteOneBookList;
   }
 
   void addBook({Book book}) async {
@@ -32,10 +34,10 @@ class BookProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addNote(Notes note) async {
+  void addNote({Notes note}) async {
+    _notesList.add(note);
     await dbHelper.insertNote(note);
-    final dataList = await dbHelper.queryTable(tableNotes);
-    print(dataList);
+    getNotes(note.bookID);
     notifyListeners();
   }
 

@@ -53,14 +53,6 @@ class _NoteCardState extends State<NoteCard> {
           ),
         ],
         child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BookScreen(id: widget.id),
-              ),
-            );
-          },
           child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
