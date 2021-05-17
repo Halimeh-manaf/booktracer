@@ -29,8 +29,8 @@ class BookScreen extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (_) => DeleteNoteDialog(
-                    title: "Delete All Notes",
-                    content: "Are you sure you want to delete all Notes?",
+                    title: "Delete All notes",
+                    content: "Are you sure you want to delete all notes?",
                     id: id + 1,
                     deleteAll: true),
                 barrierDismissible: true,
@@ -47,24 +47,17 @@ class BookScreen extends StatelessWidget {
           children: [
             HeaderWithBookTitle(size: screensize, id: id),
             TitleWithAddBtn(
-                title: "Add",
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return NoteDialog(
-                          id: id + 1,
-                        );
-                      });
-
-/*
-                  Provider.of<BookProvider>(context, listen: false).addNote(
-                      note: Notes(bookID: id + 1, note: "LOL", pageNumber: 1));
-                  print("HERE:");
-                  print(Provider.of<BookProvider>(context, listen: false)
-                      .getNotes(id + 1));
-                      */
-                }),
+              title: "Add",
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return NoteDialog(
+                        id: id + 1,
+                      );
+                    });
+              },
+            ),
             Flexible(
               fit: FlexFit.loose,
               child: Consumer<BookProvider>(
