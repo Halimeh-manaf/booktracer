@@ -1,5 +1,4 @@
 import 'package:booktracer/model/book_provider.dart';
-import 'package:booktracer/model/notes.dart';
 import 'package:booktracer/widget/delete_note.dart';
 import 'package:booktracer/widget/header_with_book_title.dart';
 import 'package:booktracer/widget/note_card.dart';
