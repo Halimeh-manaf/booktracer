@@ -77,7 +77,7 @@ class BookScreen extends StatelessWidget {
                       });
                 },
               ),
-            ),
+            )
           ],
         ),
       ),
